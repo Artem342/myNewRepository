@@ -16,7 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings            # Добавлен импорт для отображения фото в админке
+from django.conf.urls.static import static  # Добавлен импорт для отображения фото в админке
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),    
 ]
+
+# Добавьте это для обслуживания медиа-файлов в режиме разработки
+# Добавлено для отображения фото в админке
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,7 +5,7 @@ from .models import HidWork
 
 @admin.register(HidWork)
 class HidWorkAdmin(admin.ModelAdmin):
-    list_display = ("working_documentation", "hidden_work_name", "start_date", "finish_date")
+    list_display = ("title", "working_documentation", "start_date", "finish_date", "photo")
 
     # @admin.display(description="ФИО")
     # def user_full_name(self, obj):

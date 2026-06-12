@@ -10,10 +10,15 @@ class HidWork(models.Model):
         verbose_name="Ответственное лицо"
     )
 
+    title = models.CharField(max_length=255, blank=True, verbose_name="Наименование скрытой работы")
     working_documentation = models.CharField(max_length=255, blank=True, verbose_name="Рабочая документация")
-    hidden_work_name = models.CharField(max_length=255, blank=True, verbose_name="Наименование скрытой работы")
     start_date = models.DateTimeField(auto_now=True, verbose_name="Дата начала работ")
     finish_date = models.DateTimeField(auto_now=True, verbose_name="Дата окончания работ")
+    photo = models.ImageField(upload_to="HidWorks/", blank=True, verbose_name="Фотографии")
+    #created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создана")
+
+    def __str__(self):
+        return self.title
 
     class Meta():
         verbose_name = "Скрытая работа"
