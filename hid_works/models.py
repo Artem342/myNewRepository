@@ -15,11 +15,11 @@ class HidWork(models.Model):
     start_date = models.DateTimeField(auto_now=True, verbose_name="Дата начала работ")
     finish_date = models.DateTimeField(auto_now=True, verbose_name="Дата окончания работ")
     photo = models.ImageField(upload_to="HidWorks/", blank=True, verbose_name="Фотографии")
-    #created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создана")
-
-    def __str__(self):
-        return self.title
+    is_published = models.BooleanField(default=False, verbose_name="Опубликована")
 
     class Meta():
         verbose_name = "Скрытая работа"
         verbose_name_plural = "Скрытые работы"
+
+    def __str__(self):
+        return self.title
