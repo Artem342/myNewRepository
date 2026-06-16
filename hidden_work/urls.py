@@ -17,10 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings            # Добавлен импорт для отображения фото в админке
-from django.conf.urls.static import static  # Добавлен импорт для отображения фото в админке
+from django.conf.urls.static import static
+from hid_works import views
+from hid_works import views  # Добавлен импорт для отображения фото в админке
 
 urlpatterns = [
-    path('admin/', admin.site.urls),    
+    path('admin/', admin.site.urls), 
+    path('', views.index, name='index'), 
 ]
 
 # Добавьте это для обслуживания медиа-файлов в режиме разработки
