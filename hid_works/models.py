@@ -15,9 +15,11 @@ class HidWork(models.Model):
     title = models.CharField(max_length=255, blank=True, verbose_name="Наименование скрытой работы")
     slug = models.SlugField(unique=True, blank=True, verbose_name="Слаг")
     working_documentation = models.CharField(max_length=255, blank=True, verbose_name="Рабочая документация")
-    start_date = models.DateTimeField(auto_now=True, verbose_name="Дата начала работ")
-    finish_date = models.DateTimeField(auto_now=True, verbose_name="Дата окончания работ")
+    start_date = models.DateTimeField(verbose_name="Дата начала работ")
+    finish_date = models.DateTimeField(verbose_name="Дата окончания работ")
     is_published = models.BooleanField(default=False, verbose_name="Опубликована")
+    file = models.FileField(upload_to="hid_work/file", blank=True, null=True, verbose_name="Файл")
+
 
     class Meta():
         verbose_name = "Скрытая работа"

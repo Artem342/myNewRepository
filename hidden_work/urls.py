@@ -15,15 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings            # Добавлен импорт для отображения фото в админке
 from django.conf.urls.static import static
-from hid_works import views
 from hid_works import views  # Добавлен импорт для отображения фото в админке
 
 urlpatterns = [
     path('admin/', admin.site.urls), 
-    path('', views.index, name='index'), 
+    #path("", include("users.urls")),
+    path("", include("hid_works.urls")) #views.index, name='index'), 
 ]
 
 # Добавьте это для обслуживания медиа-файлов в режиме разработки

@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+    <div class="row">
+        {% for hid_work in hid_works %}
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ hid_work.title }}</h5>
+                        <p class="card-text">{{ hid_work.description }}</p>
+                        <a href="#" class="btn btn-primary">К скрытой работе</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
