@@ -1,7 +1,6 @@
 from django import forms
 
 from .models import HidWork
-#from users.models import ResponsiblePersonProfile
 
 class HidWorkForm(forms.ModelForm):
     class Meta:
@@ -13,13 +12,6 @@ class HidWorkForm(forms.ModelForm):
             "start_date",
             "finish_date",
             "is_published",
-            "ResponsiblePersonProfile", 
+            "responsible_person_profile", 
             "file"
         )
-    
-    # ResponsiblePersonProfile = forms.ModelChoiceField(
-    #     queryset=ResponsiblePersonProfile.objects.all(),
-    #     empty_label="Выберите ответственное лицо",  # <-- ТЕКСТ ПО УМОЛЧАНИЮ
-    #     label="Ответственное лицо",
-    #     required=True,  # <-- ОБЯЗАТЕЛЬНОЕ ПОЛЕ
-    # )

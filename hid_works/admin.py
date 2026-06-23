@@ -1,11 +1,17 @@
 from django.contrib import admin
-from .models import HidWork, HidWorkMaterial
+from .models import HidWork, HidWorkMaterial, WorkingDocumentation
 
 # Register your models here.
 
 class HidWorkMaterialInline(admin.TabularInline):
     model = HidWorkMaterial
     extra = 1
+
+@admin.register(WorkingDocumentation)
+class WorkingDocumentationAdmin(admin.ModelAdmin):
+    list_display = ("id", "designation", "title")
+    list_filter = ("designation",)
+    search_fields = ("designation",)
 
 @admin.register(HidWork)
 class HidWorkAdmin(admin.ModelAdmin):

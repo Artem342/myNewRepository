@@ -1,12 +1,32 @@
 {% extends "base.html" %} {% block content %}
 <div class="container">
     <div class="row">
+        <form method="get" class="card card-body mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <label>Рабочая документация</label>
+                    <select id="working_documentation" name="working_documentation" class="form-select">
+                        <option value="">Все</option>
+                        {%for doc in working_documentations%}
+                        <option value="{{doc.id}}"
+                            {% if selected_working_documentation|add:"0" == doc.id %}selected{% endif %}>
+                            {{ doc.designation }} - {{ doc.title }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class "col-2">
+                    <button type="submit" class="btn btn-primary">показать</button>
+                </div>
+            </div>
+        </form>
         {% for hid_work in hid_works %}
             <div class="col-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{ hid_work.title }}</h5>
-                        <p class="card-text">{{ hid_work.description }}</p>
+                        <p class="card-text">{{ hid_work.responsible_person_profile }}</p>
+                        <p class="card-text">{{ hid_work.working_documentation.designation }}</p>
                         <a href="#" class="btn btn-primary">К скрытой работе</a>
                     </div>
                 </div>
