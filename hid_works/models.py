@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 # Create your models here.
 
 class WorkingDocumentation(models.Model):
@@ -39,6 +40,10 @@ class HidWork(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse("hid_work-detail", kwargs={"slug": self.slug})
+    
     
 class HidWorkMaterial(models.Model):
     hid_work = models.ForeignKey(

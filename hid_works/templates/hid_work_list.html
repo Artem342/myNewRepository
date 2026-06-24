@@ -17,6 +17,7 @@
                 </div>
                 <div class "col-2">
                     <button type="submit" class="btn btn-primary">показать</button>
+                    <a href="{%url 'home'%}" class="btn btn-secondary">сбросить</a>
                 </div>
             </div>
         </form>
@@ -27,7 +28,7 @@
                         <h5 class="card-title">{{ hid_work.title }}</h5>
                         <p class="card-text">{{ hid_work.responsible_person_profile }}</p>
                         <p class="card-text">{{ hid_work.working_documentation.designation }}</p>
-                        <a href="#" class="btn btn-primary">К скрытой работе</a>
+                        <a href={% url "hid_work-detail" hid_work.slug %} class="btn btn-primary">К скрытой работе</a>
                     </div>
                 </div>
             </div>

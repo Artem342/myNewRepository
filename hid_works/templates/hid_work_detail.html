@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}{{ hid_work.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="mb-4">
+        <h1>{{hid_work.title}}</h1>
+        <span class="badge text-bg-primary">{{hid_work.get_working_documentation_display}}</span>
+    </div>
+</div>
+{% endblock %}

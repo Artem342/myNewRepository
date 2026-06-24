@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from .models import HidWork, WorkingDocumentation
 from .forms import HidWorkForm
-from django.views.generic import ListView
+from django.views.generic import ListView, DeleteView
 
 # Create your views here.
 
@@ -38,6 +38,25 @@ class HidWorkListView(ListView):
         context["selected_working_documentation"] = self.request.GET.get("working_documentation","")
         context["working_documentations"] = WorkingDocumentation.objects.all()
         return context
+
+class HidWorkDetailView(DeleteView):
+    model = HidWork
+    template_name = "hid_work_detail.html"
+    context_object_name = "hid_work" 
+    slug_url_kwarg = "slug"
+
+    def get_queryset(self):
+        return HidWork.objects.filter(is_published=True)
+    
+    
+
+
+
+
+
+
+
+
 
 
 def hid_work_create_view(request):
