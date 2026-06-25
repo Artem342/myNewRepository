@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class User(AbstractUser):
+
+    middle_name = models.CharField(max_length=255, blank=True, verbose_name="Отчество")
     phone = models.CharField(max_length=32, blank=True, verbose_name="Телефон")
     avatar = models.ImageField(upload_to="users/avatars/", blank=True,verbose_name="Аватар")
 
@@ -20,8 +22,8 @@ class ResponsiblePersonProfile(models.Model):
     )
     position = models.CharField(max_length=255, blank=True, verbose_name="Должность")
     order = models.CharField(max_length=255, blank=True, verbose_name="Приказ о назначении")
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создан")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлен")
+    #created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создан")
+    #updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлен")
 
     class Meta():
         verbose_name = "Профиль ответственного лица"
@@ -38,8 +40,8 @@ class EngineerProfile(models.Model):
         verbose_name="Инженер"
     )
     kategoriya = models.CharField(max_length=255, blank=True, verbose_name="Категория")
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создан")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлен")
+    #created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создан")
+    #updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлен")
 
     class Meta():
         verbose_name = "Профиль инженера"

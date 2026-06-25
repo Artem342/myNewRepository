@@ -2,7 +2,8 @@
 from django.shortcuts import render
 from .models import HidWork, WorkingDocumentation
 from .forms import HidWorkForm
-from django.views.generic import ListView, DeleteView
+from django.views.generic import ListView, DeleteView, CreateView
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -18,7 +19,6 @@ from django.views.generic import ListView, DeleteView
 #     }
 #     return render(request, "hid_work_list.html", context)
 
-
 class HidWorkListView(ListView):
     model = HidWork
     template_name = "hid_work_list.html"
@@ -30,7 +30,6 @@ class HidWorkListView(ListView):
         
         if working_documentation:
             hid_works = hid_works.filter(working_documentation=working_documentation)
-        
         return hid_works
     
     def get_context_data(self, **kwargs):
@@ -48,23 +47,17 @@ class HidWorkDetailView(DeleteView):
     def get_queryset(self):
         return HidWork.objects.filter(is_published=True)
     
-    
+# def hid_work_create_view(request):
+#     if request.method == "POST":
+#         form = HidWorkForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#     else:
+#         form = HidWorkForm(initial={"is_published": True})
+#     return render(request, 'hid_work_form.html', {"form": form})
 
-
-
-
-
-
-
-
-
-
-def hid_work_create_view(request):
-    if request.method == "POST":
-        form = HidWorkForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-    else:
-        form = HidWorkForm(initial={"is_published": True})
-    return render(request, 'hid_work_form.html', {"form": form})
-
+class HidWorkCreateView(CreateView):
+    model = HidWork
+    form_class = HidWorkForm
+    template_name = "hid_work_form.html"
+    success_url = reverse_lazy("home")

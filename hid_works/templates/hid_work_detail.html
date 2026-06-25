@@ -6,7 +6,17 @@
 <div class="container">
     <div class="mb-4">
         <h1>{{hid_work.title}}</h1>
-        <span class="badge text-bg-primary">{{hid_work.get_working_documentation_display}}</span>
+        <span class="badge text-bg-primary">{{hid_work.working_documentation.designation}} "{{hid_work.working_documentation.title}}"</span>
     </div>
+    <div class="card">
+        <div class="card-header">
+            Описание
+        </div>
+        <div class="card-body">
+            <p>{{hid_work.responsible_person_profile}}</p>
+        </div>
+    </div>
+
+
 </div>
 {% endblock %}

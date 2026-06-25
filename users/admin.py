@@ -19,7 +19,7 @@ class ResponsiblePersonProfileAdmin(admin.ModelAdmin):
 @admin.register(EngineerProfile)
 class EngineerProfileAdmin(admin.ModelAdmin):
     list_display = ("user_full_name", "kategoriya")
-    ordering = ("-created_at",)
+    #ordering = ("-created_at",)
 
     @admin.display(description="ФИО")
     def user_full_name(self, obj):

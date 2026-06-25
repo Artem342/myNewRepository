@@ -32,7 +32,7 @@ class HidWork(models.Model):
     start_date = models.DateTimeField(verbose_name="Дата начала работ")
     finish_date = models.DateTimeField(verbose_name="Дата окончания работ")
     is_published = models.BooleanField(default=False, verbose_name="Опубликована")
-    file = models.FileField(upload_to="hid_work/file", blank=True, null=True, verbose_name="Файл")
+    #file = models.FileField(upload_to="hid_work/file", blank=True, null=True, verbose_name="Файл")
 
     class Meta():
         verbose_name = "Скрытая работа"
@@ -52,11 +52,11 @@ class HidWorkMaterial(models.Model):
         related_name="materials",
         verbose_name="Скрытая работа" #Материалы сктытой работы"
     )
+    #position = models.PositiveIntegerField(default=1, verbose_name="Позиция")
+    title = models.CharField(max_length=255, verbose_name="Название")
+    description = models.TextField(blank=True, verbose_name="Текст")
     file = models.FileField(upload_to="hid_work_materials/", blank=True, verbose_name="Файл")
     url = models.URLField(blank=True, verbose_name="Ссылка")
-    position = models.PositiveIntegerField(default=1, verbose_name="Позиция")
-    title = models.CharField(max_length=255, verbose_name="Название")
-    text = models.TextField(blank=True, verbose_name="Текст")
 
     #photo = models.ImageField(upload_to="HidWorks/", blank=True, verbose_name="Фотографии")
     #guality_sertificates = 
