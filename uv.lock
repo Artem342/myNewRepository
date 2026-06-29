@@ -26,17 +26,39 @@ wheels = [
 ]
 
 [[package]]
+name = "django-bootstrap3"
+version = "26.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f7/71/289b22cc19292e9a035a5a89277ef40ac3072b3bc52b12b00dadfbd9a3ba/django_bootstrap3-26.1.tar.gz", hash = "sha256:c437ec3bf19d9ef0b7554664b4dbea27c73fbd9927f8c7aa20559c68d38e8eea", size = 41832, upload-time = "2026-01-03T11:51:25.404Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9c/2d/c00d368d32d153b998a22b167b20db038f2f7d469d5d08f23256d8037518/django_bootstrap3-26.1-py3-none-any.whl", hash = "sha256:657201127b6c09f69d0ca60e944a32593fb6132923a9d1293bc6bfaacdb1a4ba", size = 24232, upload-time = "2026-01-03T11:51:24.335Z" },
+]
+
+[[package]]
+name = "django-form-utils"
+version = "1.0.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/fe/4e/0d860844f52081507e7d16349682c184768abebadb92af5fbb852bb64bfd/django-form-utils-1.0.3.tar.gz", hash = "sha256:670d0c6ce809aa91f17b6cb8905dab7a56d054191251540d5d011649c4fda108", size = 21190, upload-time = "2015-08-25T15:43:09.305Z" }
+
+[[package]]
 name = "hidden-work"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "django" },
+    { name = "django-bootstrap3" },
+    { name = "django-form-utils" },
     { name = "pillow" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "django", specifier = ">=6.0.6" },
+    { name = "django-bootstrap3", specifier = ">=26.1" },
+    { name = "django-form-utils", specifier = ">=1.0.3" },
     { name = "pillow", specifier = ">=12.2.0" },
 ]
 

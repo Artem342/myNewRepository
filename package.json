@@ -1,0 +1,22 @@
+{
+  "name": "hidden_work",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "echo 'Development mode for Django'",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Artem342/myNewRepository.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Artem342/myNewRepository/issues"
+  },
+  "homepage": "https://github.com/Artem342/myNewRepository#readme",
+  "description": ""
+}

@@ -2,8 +2,9 @@
 from django.shortcuts import render
 from .models import HidWork, WorkingDocumentation
 from .forms import HidWorkForm
-from django.views.generic import ListView, DeleteView, CreateView
+from django.views.generic import ListView, DeleteView, CreateView, TemplateView
 from django.urls import reverse_lazy
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -18,6 +19,55 @@ from django.urls import reverse_lazy
 #         "hid_works": hid_works
 #     }
 #     return render(request, "hid_work_list.html", context)
+
+
+class HidWorkListFetchView(TemplateView):
+    template_name = "hid_work_list_fetch.html"
+
+    def get_queryset(self):
+        hid_works = HidWork.objects.filter(is_published=True)
+        working_documentation = self.request.GET.get("working_documentation")
+        
+        if working_documentation:
+            hid_works = hid_works.filter(working_documentation=working_documentation)
+        return hid_works
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["selected_working_documentation"] = self.request.GET.get("working_documentation","")
+        context["working_documentations"] = WorkingDocumentation.objects.all()
+        return context
+
+
+class HidWorkListJSONView(ListView):
+    model = HidWork
+
+    def get_queryset(self):
+        hid_works = HidWork.objects.filter(is_published=True)
+        working_documentation = self.request.GET.get("working_documentation")
+        
+        if working_documentation:
+            hid_works = hid_works.filter(working_documentation=working_documentation)
+        return hid_works
+
+    def render_to_response(self, context, **response_kwargs):
+        hid_works= context["object_list"]
+        data = []
+
+        for hid_work in hid_works:
+            data.append(
+                {
+                    "id": hid_work.id,
+                    "title": hid_work.title,
+                    "slug": hid_work.slug,
+                    "working_documentation": hid_work.working_documentation.designation,
+                    "responsible_person_profile": hid_work.responsible_person_profile.user.last_name,
+                    "start_date": hid_work.start_date,
+                    "finish_date": hid_work.finish_date,
+                }
+            )
+        return JsonResponse(data, safe=False)
+
 
 class HidWorkListView(ListView):
     model = HidWork

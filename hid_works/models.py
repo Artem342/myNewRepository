@@ -11,6 +11,15 @@ class WorkingDocumentation(models.Model):
                                    
 
 class HidWork(models.Model):
+    
+    title = models.CharField(max_length=255, blank=True, verbose_name="Наименование скрытой работы")
+    slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="Слаг")
+    working_documentation = models.ForeignKey(
+        "WorkingDocumentation",
+        on_delete=models.CASCADE,
+        related_name="hid_works",
+        verbose_name="Рабочая документация"
+    )
     responsible_person_profile = models.ForeignKey(
         "users.ResponsiblePersonProfile",
         on_delete=models.CASCADE,
@@ -19,14 +28,6 @@ class HidWork(models.Model):
         null=True,  # ✅ Временно разрешаем NULL
         blank=True,
         default=None
-    )
-    title = models.CharField(max_length=255, blank=True, verbose_name="Наименование скрытой работы")
-    slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="Слаг")
-    working_documentation = models.ForeignKey(
-        "WorkingDocumentation",
-        on_delete=models.CASCADE,
-        related_name="hid_works",
-        verbose_name="Рабочая документация"
     )
     #working_documentation = models.CharField(max_length=255, blank=True, verbose_name="Рабочая документация")
     start_date = models.DateTimeField(verbose_name="Дата начала работ")
