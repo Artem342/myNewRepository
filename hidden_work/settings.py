@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     #'form_utils',
     'users',
     'hid_works',
-    'documents'
+    'documents',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
