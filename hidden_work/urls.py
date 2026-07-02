@@ -18,12 +18,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings            # Добавлен импорт для отображения фото в админке
 from django.conf.urls.static import static
-from hid_works import views  # Добавлен импорт для отображения фото в админке
+
+
+from rest_framework.routers import DefaultRouter
+from hid_works.views import HidWorkViewSet, HidWorkMaterialViewSet
+router = DefaultRouter()
+router.register("hid_work", HidWorkViewSet)
+router.register("hid_work_material", HidWorkMaterialViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls), 
-    #path("", include("users.urls")),
-    path("", include("hid_works.urls")) #views.index, name='index'), 
+    path("accounts", include("django.contrib.auth.urls")),
+    path("api/", include(router.urls)),
+    path("", include("hid_works.urls"))
 ]
 
 # Добавьте это для обслуживания медиа-файлов в режиме разработки

@@ -1,7 +1,12 @@
-from django.urls import path
-
-from .views import HidWorkListView, HidWorkDetailView, HidWorkCreateView, HidWorkListJSONView, HidWorkListFetchView #id_work_create_view
-
+from django.urls import path, include
+from .views import (
+    HidWorkViewSet,
+    HidWorkListView, 
+    HidWorkDetailView, 
+    HidWorkCreateView, 
+    HidWorkListJSONView, 
+    HidWorkListFetchView
+)
 
 urlpatterns = [
     #path('', hid_work_list_view, name="home"),

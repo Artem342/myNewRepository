@@ -7,6 +7,8 @@ requires-python = ">=3.12"
 dependencies = [
     "django>=6.0.6",
     "django-bootstrap3>=26.1",
+    "django-filter>=25.2",
     "django-form-utils>=1.0.3",
+    "djangorestframework>=3.17.1",
     "pillow>=12.2.0",
 ]

@@ -1,42 +1,62 @@
 #from django.http import HttpResponse
 from django.shortcuts import render
-from .models import HidWork, WorkingDocumentation
+from .models import HidWork, WorkingDocumentation, HidWorkMaterial
 from .forms import HidWorkForm
 from django.views.generic import ListView, DeleteView, CreateView, TemplateView
 from django.urls import reverse_lazy
 from django.http import JsonResponse
+from rest_framework.viewsets import ModelViewSet
+from django_filters import rest_framework as filters
+from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models import Q
+from .serializers import HidWorkSerialazer, HidWorkMaterialSerialazer
+from rest_framework.response import Response
+from rest_framework.decorators import action
 
-# Create your views here.
+class HidWorkFilter(filters.FilterSet):
+    search = filters.CharFilter(method="get_search2")
+    
+    def get_search2(self, queryset, name, value):
+        if value:
+            queryset = queryset.filter(
+                Q(title__icontains=value) | Q(start_date__icontains=value)
+            )
+        return queryset
 
-# def index(request):
-#     return HttpResponse("Главная страница сайта")
+    class Meta:
+        model = HidWork
+        exclude = ['file',]
 
-# def hid_work_list_view(request):
-#     hid_works = HidWork.objects.select_related('responsible_person_profile__user').filter(is_published=True)
-#     if request.user.is_authenticated and hasattr(request.user, "responsible_person_profile"):
-#         hid_works = HidWork.objects.select_related("responsible_person_profile__user")
-#     context = {
-#         "hid_works": hid_works
-#     }
-#     return render(request, "hid_work_list.html", context)
+
+class HidWorkViewSet(ModelViewSet):
+    queryset = HidWork.objects.all()
+    serializer_class = HidWorkSerialazer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = HidWorkFilter
+
+    @action(detail=False, methods=["get"])
+    def work_doc(self, request):
+        working_docs = WorkingDocumentation.objects.all()
+        return Response(
+            [{"id": WD.id, "title": WD.title} for WD  in working_docs]
+        )
+
+
+class HidWorkMaterialFilter(filters.FilterSet):
+    class Meta:
+        model = HidWorkMaterial
+        exclude = ['file',]
+
+
+class HidWorkMaterialViewSet(ModelViewSet):
+    queryset = HidWorkMaterial.objects.all()
+    serializer_class = HidWorkMaterialSerialazer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = HidWorkMaterialFilter
 
 
 class HidWorkListFetchView(TemplateView):
     template_name = "hid_work_list_fetch.html"
-
-    def get_queryset(self):
-        hid_works = HidWork.objects.filter(is_published=True)
-        working_documentation = self.request.GET.get("working_documentation")
-        
-        if working_documentation:
-            hid_works = hid_works.filter(working_documentation=working_documentation)
-        return hid_works
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["selected_working_documentation"] = self.request.GET.get("working_documentation","")
-        context["working_documentations"] = WorkingDocumentation.objects.all()
-        return context
 
 
 class HidWorkListJSONView(ListView):
