@@ -37,9 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'bootstrap3',
+    #'form_utils',
     'users',
     'hid_works',
-    'documents'
+    'documents',
+    'rest_framework',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -70,6 +74,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hidden_work.wsgi.application'
+
+
+REST_FRAMEWORK = {
+"DEFAULT_PAGINATION_CLASS":
+"rest_framework.pagination.PageNumberPagination",
+"PAGE_SIZE": 10,
+}
 
 
 # Database
