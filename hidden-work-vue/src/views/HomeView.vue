@@ -1,18 +1,19 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import { HidWork, HidWorkMaterial, WorkDoc } from '@/api.js'
+import { HidWork, HidWorkMaterial, WorkDocs } from '@/api.js'
 import NavBar from '@/components/NavBar.vue'
 
 const HidWorkList = ref([])
 const material = ref([])
 const search = ref('')
 const selectedWorkingDocumentation = ref('')
-const workingDocs = ref([])
+// const workingDocs = ref([])
 
-const workDoc = ref([])
-const getWorkDoc = async () => {
-  workDoc.value - (await WorkDoc.getList()).data
+const workDoc = ref('')
+const workDocs = ref([])
+const getWorkDocs = async () => {
+  workDocs.value - await WorkDocs.getList()
 }
 
 const getHidWorkList = async () => {
@@ -61,16 +62,17 @@ onMounted(() => {
               id="working_documentation" 
               name="working_documentation" 
               class="form-select"
-              v-model="selectedWorkingDocumentation"
+              v-model="workDoc"
             >
               <option value="">Все</option>
               <option 
-                v-for="doc in workingDocs" 
-                :key="doc.id"
-                :value="doc.id"
-                :selected="selectedWorkingDocumentation == doc.id"
+                v-for="doc in workDocs" 
+                :key="doc.value"
+                :value="doc.value"
+                <!-- :selected="selectedWorkingDocumentation == doc.id" -->
               >
-                {{ doc.designation }} - {{ doc.title }}
+                <!-- {{ doc.designation }} - {{ doc.title }} -->
+                {{ doc.label }}
               </option>
             </select>
           </div>

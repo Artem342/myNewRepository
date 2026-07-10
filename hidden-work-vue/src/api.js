@@ -80,6 +80,6 @@ function apiConstructor(apiUrl) {
 }
 
 export let HidWork = apiConstructor("/api/hid_work/")
-export let WorkDoc = apiConstructor("/api/work_doc/")
+export let WorkDocs = apiConstructor("/api/work_doc/")
 export let HidWorkMaterial = apiConstructor("/api/hid_work_material/")
 export let HidWorkTestPublic = apiConstructor("/api/hid_work_test_public/")
